@@ -37,32 +37,96 @@ class RemoteVenueLoaderTest: XCTestCase {
     
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
-        
-        var capturedErrors = [RemoteVenueLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let clientError = NSError(domain: "Test", code: 0)
-        client.complete(with: clientError)
-        
-        XCTAssertEqual(capturedErrors, [.connectivity])
+        expect(sut, toCompleteWithResult: .failure(.connectivity)) {
+            let clientError = NSError(domain: "Test", code: 0)
+            client.complete(with: clientError)
+        }
     }
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
-        
         [199, 201, 300, 400, 500].enumerated().forEach { index, code in
-            var capturedErrors = [RemoteVenueLoader.Error]()
-            sut.load { capturedErrors.append($0) }
-            
-            client.complete(withStatusCode: code, at: index)
-            XCTAssertEqual(capturedErrors, [.invalidData])
+            expect(sut, toCompleteWithResult: .failure(.invalidData)) {
+                client.complete(withStatusCode: code, at: index)
+            }
         }
     }
     
-    // MARK: - Helpers
-    private func makeSUT(from url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteVenueLoader, cliennt: HTTPClientSpy) {
+    func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+        let (sut, client) = makeSUT()
+        expect(sut, toCompleteWithResult: .failure(.invalidData)) {
+            let invalidJSON = Data("invalid json".utf8)
+            client.complete(withStatusCode: 200, data: invalidJSON)
+        }
+    }
+    
+    func test_load_deliversNoVenueOn200HTTPResponseWithEmptyJSON() {
+        let (sut, client) = makeSUT()
+        
+        expect(sut, toCompleteWithResult: .success([])) {
+            let emptyListJSON = Data("{ \"response\": { \"venues\": [] }}".utf8)
+            client.complete(withStatusCode: 200, data: emptyListJSON)
+        }
+    }
+    
+    func test_load_deliversVenueItemsOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let venue1 = Venue(id: UUID().uuidString, name: "FirstBank Allen Avenue branch")
+        let venue2 = Venue(id: UUID().uuidString, name: "Washyard Laundromat")
+        
+        let jsonItem1 = ["id": venue1.id, "name": venue1.name]
+        let jsonItem2 = ["id": venue2.id, "name": venue2.name]
+        
+        let venueJSON = ["venues": [jsonItem1, jsonItem2]]
+        let responseJSON = ["response": venueJSON]
+        
+        expect(sut, toCompleteWithResult: .success([venue1, venue2])) {
+            let json = try! JSONSerialization.data(withJSONObject: responseJSON)
+            client.complete(withStatusCode: 200, data: json)
+        }
+    }
+    
+    func test_load_doesNotDeliverResultAfterSUTDeallocation() {
         let client = HTTPClientSpy()
-        return (RemoteVenueLoader(url: url, client: client), client)
+        let url = URL(string: "https://a-url.com")!
+        var sut: RemoteVenueLoader? = RemoteVenueLoader(url: url, client: client)
+        
+        var capturedResults = [RemoteVenueLoader.Result]()
+        sut?.load { capturedResults.append($0) }
+        
+        sut = nil
+        
+        let emptyListJSON = Data("{ \"response\": { \"venues\": [] }}".utf8)
+        client.complete(withStatusCode: 200, data: emptyListJSON)
+        
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
+    
+    // MARK: - Helpers
+    private func makeSUT(from url: URL = URL(string: "https://a-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteVenueLoader, cliennt: HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteVenueLoader(url: url, client: client)
+        
+        trackForMemoryLeaks(sut, file, line)
+        trackForMemoryLeaks(client, file, line)
+        
+        return (sut, client)
+    }
+    
+    fileprivate func trackForMemoryLeaks(_ instance: AnyObject, _ file: StaticString, _ line: UInt) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Potential memory leak ", file: file, line: line)
+        }
+    }
+    
+    private func expect(_ sut: RemoteVenueLoader, toCompleteWithResult result: RemoteVenueLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedResults = [RemoteVenueLoader.Result]()
+        sut.load { capturedResults.append($0) }
+        
+        action()
+        
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
     private class HTTPClientSpy: HTTPClient {
@@ -81,9 +145,9 @@ class RemoteVenueLoaderTest: XCTestCase {
             messages[index].completions(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[0], statusCode: code, httpVersion: nil, headerFields: nil)!
-            messages[index].completions(.success(response))
+            messages[index].completions(.success(data, response))
         }
     }
 }
