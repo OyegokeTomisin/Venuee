@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum LoadVenueResult {
+public enum LoadVenueResult {
     case success([Venue])
-    case error(Error)
+    case failure(Error)
 }
 
-protocol VenueLoader {
+public protocol VenueLoader {
     func load(completion: @escaping (LoadVenueResult) -> Void)
 }

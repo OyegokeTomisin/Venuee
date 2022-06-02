@@ -32,7 +32,7 @@ internal final class VenueItemsMapper {
     internal static func map(data: Data, response: HTTPURLResponse) -> RemoteVenueLoader.Result {
         guard response.statusCode == OK_200,
               let root = try? JSONDecoder().decode(Root.self, from: data) else {
-            return .failure(.invalidData)
+            return .failure(RemoteVenueLoader.Error.invalidData)
         }
         return .success(root.venueItem)
     }

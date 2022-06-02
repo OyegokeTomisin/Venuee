@@ -17,24 +17,21 @@ public final class RemoteVenueLoader {
         case invalidData
     }
     
-    public enum Result: Equatable {
-        case success([Venue])
-        case failure(RemoteVenueLoader.Error)
-    }
+    public typealias Result = LoadVenueResult
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
-    public func load(completion: @escaping (Result) -> Void) {
+    public func load(completion: @escaping (LoadVenueResult) -> Void) {
         client.get(from: url) { [weak self] result  in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):
                 completion(VenueItemsMapper.map(data: data, response: response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
