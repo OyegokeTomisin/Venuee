@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Venue {
+    let id: String
+    let name: String
+}
