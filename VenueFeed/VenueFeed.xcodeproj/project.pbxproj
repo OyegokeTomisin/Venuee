@@ -11,6 +11,7 @@
 		949F32F12848B2140088BA8E /* VenueFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F32F02848B2140088BA8E /* VenueFeedTests.swift */; };
 		949F32F22848B2140088BA8E /* VenueFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 949F32E62848B2140088BA8E /* VenueFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		949F32FC2848B2480088BA8E /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F32FB2848B2480088BA8E /* Venue.swift */; };
+		949F32FE2848B3940088BA8E /* VenueLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F32FD2848B3940088BA8E /* VenueLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		949F32EB2848B2140088BA8E /* VenueFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VenueFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949F32F02848B2140088BA8E /* VenueFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueFeedTests.swift; sourceTree = "<group>"; };
 		949F32FB2848B2480088BA8E /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		949F32FD2848B3940088BA8E /* VenueLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				949F32E62848B2140088BA8E /* VenueFeed.h */,
-				949F32FB2848B2480088BA8E /* Venue.swift */,
+				949F32FF2848B4740088BA8E /* Venue */,
 			);
 			path = VenueFeed;
 			sourceTree = "<group>";
@@ -83,6 +85,15 @@
 				949F32F02848B2140088BA8E /* VenueFeedTests.swift */,
 			);
 			path = VenueFeedTests;
+			sourceTree = "<group>";
+		};
+		949F32FF2848B4740088BA8E /* Venue */ = {
+			isa = PBXGroup;
+			children = (
+				949F32FB2848B2480088BA8E /* Venue.swift */,
+				949F32FD2848B3940088BA8E /* VenueLoader.swift */,
+			);
+			path = Venue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				949F32FE2848B3940088BA8E /* VenueLoader.swift in Sources */,
 				949F32FC2848B2480088BA8E /* Venue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
