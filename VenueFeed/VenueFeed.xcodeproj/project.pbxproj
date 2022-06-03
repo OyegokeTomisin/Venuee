@@ -14,6 +14,8 @@
 		949F332528494F370088BA8E /* VenueItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F332228494F370088BA8E /* VenueItemsMapper.swift */; };
 		949F332628494F370088BA8E /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F332328494F370088BA8E /* HTTPClient.swift */; };
 		949F332728494F370088BA8E /* RemoteVenueLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F332428494F370088BA8E /* RemoteVenueLoader.swift */; };
+		949F3329284A0B810088BA8E /* URLSessionHTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F3328284A0B810088BA8E /* URLSessionHTTPClientTest.swift */; };
+		94BB80AD284A540E000DDFB7 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB80AC284A540E000DDFB7 /* URLSessionHTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,8 @@
 		949F332228494F370088BA8E /* VenueItemsMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueItemsMapper.swift; sourceTree = "<group>"; };
 		949F332328494F370088BA8E /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		949F332428494F370088BA8E /* RemoteVenueLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVenueLoader.swift; sourceTree = "<group>"; };
+		949F3328284A0B810088BA8E /* URLSessionHTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTest.swift; sourceTree = "<group>"; };
+		94BB80AC284A540E000DDFB7 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				949F330E2848B7370088BA8E /* RemoteVenueLoaderTest.swift */,
+				949F3328284A0B810088BA8E /* URLSessionHTTPClientTest.swift */,
 			);
 			path = VenueFeedTests;
 			sourceTree = "<group>";
@@ -103,9 +108,10 @@
 		949F332128494F1C0088BA8E /* Venue API */ = {
 			isa = PBXGroup;
 			children = (
-				949F332328494F370088BA8E /* HTTPClient.swift */,
-				949F332428494F370088BA8E /* RemoteVenueLoader.swift */,
 				949F332228494F370088BA8E /* VenueItemsMapper.swift */,
+				949F332428494F370088BA8E /* RemoteVenueLoader.swift */,
+				949F332328494F370088BA8E /* HTTPClient.swift */,
+				94BB80AC284A540E000DDFB7 /* URLSessionHTTPClient.swift */,
 			);
 			path = "Venue API";
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 				949F332628494F370088BA8E /* HTTPClient.swift in Sources */,
 				949F332528494F370088BA8E /* VenueItemsMapper.swift in Sources */,
 				949F332728494F370088BA8E /* RemoteVenueLoader.swift in Sources */,
+				94BB80AD284A540E000DDFB7 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				949F330F2848B7370088BA8E /* RemoteVenueLoaderTest.swift in Sources */,
+				949F3329284A0B810088BA8E /* URLSessionHTTPClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
