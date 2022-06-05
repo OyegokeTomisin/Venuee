@@ -11,6 +11,7 @@
 		944AFE03284D4FCF0001739C /* VenueFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 944AFE00284D4FCF0001739C /* VenueFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		944AFE04284D4FCF0001739C /* VenueFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 944AFE01284D4FCF0001739C /* VenueFeediOS.framework */; };
 		944AFE05284D4FCF0001739C /* VenueFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 944AFE01284D4FCF0001739C /* VenueFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		944AFE08284D616C0001739C /* VenueUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFE07284D616C0001739C /* VenueUIComposer.swift */; };
 		94BB80D5284D3614000DDFB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB80D4284D3614000DDFB7 /* AppDelegate.swift */; };
 		94BB80D7284D3614000DDFB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB80D6284D3614000DDFB7 /* SceneDelegate.swift */; };
 		94BB80DE284D3616000DDFB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94BB80DD284D3616000DDFB7 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		944AFE00284D4FCF0001739C /* VenueFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VenueFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		944AFE01284D4FCF0001739C /* VenueFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VenueFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		944AFE07284D616C0001739C /* VenueUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueUIComposer.swift; sourceTree = "<group>"; };
 		94BB80D1284D3614000DDFB7 /* VenueeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VenueeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94BB80D4284D3614000DDFB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94BB80D6284D3614000DDFB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				94BB80D4284D3614000DDFB7 /* AppDelegate.swift */,
 				94BB80D6284D3614000DDFB7 /* SceneDelegate.swift */,
+				944AFE07284D616C0001739C /* VenueUIComposer.swift */,
 				94BB80DD284D3616000DDFB7 /* Assets.xcassets */,
 				94BB80DF284D3616000DDFB7 /* LaunchScreen.storyboard */,
 				94BB80E2284D3616000DDFB7 /* Info.plist */,
@@ -287,6 +290,7 @@
 			files = (
 				94BB80D5284D3614000DDFB7 /* AppDelegate.swift in Sources */,
 				94BB80D7284D3614000DDFB7 /* SceneDelegate.swift in Sources */,
+				944AFE08284D616C0001739C /* VenueUIComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

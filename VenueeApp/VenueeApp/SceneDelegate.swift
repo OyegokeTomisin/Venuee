@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import VenueFeed
-import VenueFeediOS
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -20,12 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureWindow()
     }
     
+    private lazy var navigationController = UINavigationController(
+        rootViewController: VenueUIComposer.venueControllerComposedWith()
+    )
+    
     func configureWindow() {
-        let venueViewController = VenueViewController()
-        let aboutUsViewController = AboutUsViewController()
-        let rootController = VenueRootViewController(venueController: venueViewController, aboutUsController: aboutUsViewController)
-        window?.rootViewController = rootController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
-
