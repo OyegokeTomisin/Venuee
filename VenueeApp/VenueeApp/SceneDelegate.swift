@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import VenueFeed
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -19,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private lazy var navigationController = UINavigationController(
-        rootViewController: VenueUIComposer.venueControllerComposedWith()
+        rootViewController: VenueUIComposer.venueControllerComposedWith(location: UserLocation(long: 6.5, lat: 3.8))
     )
     
     func configureWindow() {

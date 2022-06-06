@@ -7,25 +7,30 @@
 
 import Foundation
 import VenueFeediOS
+import VenueFeed
 
 public final class VenueUIComposer {
     
     private init() {}
     
-    public static func venueControllerComposedWith() -> VenueRootViewController {
-        let controller = makeVenueRootController()
+    public static func venueControllerComposedWith(location: UserLocation?) -> VenueRootViewController {
+        let client = URLSessionHTTPClient()
+        let urlRequest = VenueEndpoint.getVenue(from: location).urlRequest(baseURL: URL(string: "https://api.foursquare.com")!)
+        let loader = RemoteVenueLoader(urlRequest: urlRequest, client: client)
+        let controller = makeVenueRootController(loader: loader)
         return controller
     }
     
-    private static func makeVenueRootController() -> VenueRootViewController {
-        let venueController = makeVenueViewController()
+    private static func makeVenueRootController(loader: VenueLoader) -> VenueRootViewController {
+        let viewModel = VenueFeedViewModel(remoteLoader: loader)
+        let venueController = makeVenueViewController(with: viewModel)
         let aboutUsController = makeAboutUsViewController()
         let rootViewController = VenueRootViewController(venueController: venueController, aboutUsController: aboutUsController)
         return rootViewController
     }
     
-    private static func makeVenueViewController() -> VenueViewController {
-        let venueController = VenueViewController()
+    private static func makeVenueViewController(with venueFeedViewModel: VenueFeedViewModel) -> VenueViewController {
+        let venueController = VenueViewController(viewModel: venueFeedViewModel)
         return venueController
     }
     
