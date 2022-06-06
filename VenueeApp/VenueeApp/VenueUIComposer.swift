@@ -30,7 +30,8 @@ public final class VenueUIComposer {
     }
     
     private static func makeAboutUsViewController() -> AboutUsViewController {
-        let aboutUsController = AboutUsViewController()
+        let url = URL(string: "https://generator.lorem-ipsum.info/terms-and-conditions")
+        let aboutUsController = AboutUsViewController(pageURL: url!)
         return aboutUsController
     }
 }
