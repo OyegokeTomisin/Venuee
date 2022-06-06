@@ -24,21 +24,36 @@ public final class VenueViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLayout()
         setUpOnLoad()
-        viewModel.fetchNearestVenue()
-        viewModel.reloadData = { [weak self] in
-            self?.layout.venuItemTableView.reloadData()
-        }
+        loadVenue()
     }
     
-    func setUpOnLoad() {
+    private func setUpLayout() {
         view.addSubview(layout)
         view.backgroundColor = .white
         layout.fillSuperview()
-        
+    }
+    
+    private func setUpOnLoad() {
         layout.venuItemTableView.delegate = self
         layout.venuItemTableView.dataSource = self
+        layout.pullToRefresh.addTarget(self, action: #selector(loadVenue), for: .valueChanged)
         layout.venuItemTableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.viewIdentifier)
+        
+        viewModel.reloadData = { [weak self] in
+            self?.reloadTableData()
+        }
+    }
+    
+    @objc private func loadVenue() {
+        layout.pullToRefresh.beginRefreshing()
+        viewModel.fetchNearestVenue()
+    }
+    
+    private func reloadTableData() {
+        layout.pullToRefresh.endRefreshing()
+        layout.venuItemTableView.reloadData()
     }
 }
 

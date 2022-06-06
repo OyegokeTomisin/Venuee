@@ -10,6 +10,7 @@ import UIKit
 final internal class VenueLayout: UIView {
     
     internal let venuItemTableView = UITableView()
+    internal private(set) var pullToRefresh = UIRefreshControl()
     
     internal override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +22,8 @@ final internal class VenueLayout: UIView {
     }
     
     private func setup() {
+        venuItemTableView.addSubview(pullToRefresh)
+        venuItemTableView.refreshControl = pullToRefresh
         addSubviews(venuItemTableView)
         venuItemTableView.fillSuperview()
     }
