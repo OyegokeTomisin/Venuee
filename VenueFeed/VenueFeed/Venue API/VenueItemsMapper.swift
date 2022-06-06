@@ -10,19 +10,22 @@ import Foundation
 internal final class VenueItemsMapper {
     
     private struct Root: Decodable {
-        private let response: RootVenue
+        
+        private let results: [RemoteVenue?]
+        
         internal var venueItem: [Venue] {
-            return response.venues.map { Venue(id: $0.id, name: $0.name) }
+            let items = results.compactMap( { $0 })
+            return items.map { Venue(name: $0.name, address: $0.location?.address) }
         }
     }
     
-    private struct RootVenue: Decodable {
-        let venues: [RemoteVenue]
+    private struct RemoteVenue: Decodable {
+        let name: String
+        let location: RemoteVenueLocation?
     }
     
-    private struct RemoteVenue: Decodable {
-        let id: String
-        let name: String
+    private struct RemoteVenueLocation: Decodable {
+        let address: String?
     }
     
     private static var OK_200: Int {

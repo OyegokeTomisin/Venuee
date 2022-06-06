@@ -7,9 +7,9 @@
 
 import Foundation
 
-public final class RemoteVenueLoader {
+public final class RemoteVenueLoader: VenueLoader {
     
-    private let url: URL
+    private let urlRequest: URLRequest
     private let client: HTTPClient
     
     public enum Error: Swift.Error {
@@ -19,13 +19,13 @@ public final class RemoteVenueLoader {
     
     public typealias Result = LoadVenueResult
     
-    public init(url: URL, client: HTTPClient) {
-        self.url = url
+    public init(urlRequest: URLRequest, client: HTTPClient) {
+        self.urlRequest = urlRequest
         self.client = client
     }
     
     public func load(completion: @escaping (LoadVenueResult) -> Void) {
-        client.get(from: url) { [weak self] result  in
+        client.get(from: urlRequest) { [weak self] result  in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):

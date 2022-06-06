@@ -8,11 +8,11 @@
 import Foundation
 
 public struct Venue: Equatable {
-    public let id: String
     public let name: String
+    public let address: String?
     
-    public init(id: String, name: String) {
-        self.id = id
+    public init(name: String, address: String?) {
         self.name = name
+        self.address = address
     }
 }
