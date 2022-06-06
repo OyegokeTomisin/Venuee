@@ -9,20 +9,21 @@ import Foundation
 
 final public class VenueFeedViewModel {
     
-    private let remoteLoader: VenueLoader
+    private let venueLoader: VenueLoader
     private(set) var venueList: [Venue] = []
     
     public var reloadData: (() -> Void)?
+    public var alertErrorMessage: ((String) -> Void)?
     public var venueItems: [Venue] {
         return venueList
     }
     
-    public init(remoteLoader: VenueLoader) {
-        self.remoteLoader = remoteLoader
+    public init(venueLoader: VenueLoader) {
+        self.venueLoader = venueLoader
     }
     
     public func fetchNearestVenue() {
-        remoteLoader.load { [weak self] result in
+        venueLoader.load { [weak self] result in
             DispatchQueue.main.async {
                 self?.handleResult(result: result)
             }
@@ -35,16 +36,7 @@ final public class VenueFeedViewModel {
             venueList = array
             reloadData?()
         case .failure(let error):
-            if let error =  error as? RemoteVenueLoader.Error {
-                switch error {
-                case .connectivity:
-                    debugPrint(error)
-                case .invalidData:
-                    debugPrint(error)
-                }
-            } else {
-                debugPrint(error)
-            }
+            alertErrorMessage?(error.localizedDescription)
         }
     }
 }

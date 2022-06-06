@@ -17,12 +17,13 @@ public final class VenueUIComposer {
         let client = URLSessionHTTPClient()
         let urlRequest = VenueEndpoint.getVenue(from: location).urlRequest(baseURL: URL(string: "https://api.foursquare.com")!)
         let loader = RemoteVenueLoader(urlRequest: urlRequest, client: client)
-        let controller = makeVenueRootController(loader: loader)
+        let venueLoaderAdapter = VenueLoaderAdapter(remoteLoader: loader, localLoader: loader)
+        let controller = makeVenueRootController(loader: venueLoaderAdapter)
         return controller
     }
     
     private static func makeVenueRootController(loader: VenueLoader) -> VenueRootViewController {
-        let viewModel = VenueFeedViewModel(remoteLoader: loader)
+        let viewModel = VenueFeedViewModel(venueLoader: loader)
         let venueController = makeVenueViewController(with: viewModel)
         let aboutUsController = makeAboutUsViewController()
         let rootViewController = VenueRootViewController(venueController: venueController, aboutUsController: aboutUsController)

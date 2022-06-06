@@ -20,6 +20,7 @@
 		944AFE0E284DED0D0001739C /* VenueEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFE0D284DED0D0001739C /* VenueEndpointTests.swift */; };
 		944AFE14284E09770001739C /* VenueFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFE13284E09770001739C /* VenueFeedViewModel.swift */; };
 		944AFE16284E37830001739C /* VenueLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFE15284E37830001739C /* VenueLayout.swift */; };
+		944AFE18284E4ECA0001739C /* VenueLoaderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944AFE17284E4ECA0001739C /* VenueLoaderAdapter.swift */; };
 		949F33082848B6DF0088BA8E /* VenueFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949F32E32848B2140088BA8E /* VenueFeed.framework */; };
 		949F330F2848B7370088BA8E /* RemoteVenueLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F330E2848B7370088BA8E /* RemoteVenueLoaderTest.swift */; };
 		949F331F28494EFB0088BA8E /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F331D28494EFB0088BA8E /* Venue.swift */; };
@@ -69,6 +70,7 @@
 		944AFE0D284DED0D0001739C /* VenueEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueEndpointTests.swift; sourceTree = "<group>"; };
 		944AFE13284E09770001739C /* VenueFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueFeedViewModel.swift; sourceTree = "<group>"; };
 		944AFE15284E37830001739C /* VenueLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueLayout.swift; sourceTree = "<group>"; };
+		944AFE17284E4ECA0001739C /* VenueLoaderAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueLoaderAdapter.swift; sourceTree = "<group>"; };
 		949F32E32848B2140088BA8E /* VenueFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VenueFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		949F33042848B6DF0088BA8E /* VenueFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VenueFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949F330E2848B7370088BA8E /* RemoteVenueLoaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVenueLoaderTest.swift; sourceTree = "<group>"; };
@@ -135,13 +137,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		944AFE0F284DFEB50001739C /* About Us */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "About Us";
-			sourceTree = "<group>";
-		};
 		944AFE12284E09610001739C /* Venue Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				944AFE12284E09610001739C /* Venue Presentation */,
-				944AFE0F284DFEB50001739C /* About Us */,
 				949F332128494F1C0088BA8E /* Venue API */,
 				949F32FF2848B4740088BA8E /* Venue Feature */,
 			);
@@ -188,8 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				949F331D28494EFB0088BA8E /* Venue.swift */,
-				949F331E28494EFB0088BA8E /* VenueLoader.swift */,
 				944AFE0B284DEBED0001739C /* UserLocation.swift */,
+				949F331E28494EFB0088BA8E /* VenueLoader.swift */,
+				944AFE17284E4ECA0001739C /* VenueLoaderAdapter.swift */,
 			);
 			path = "Venue Feature";
 			sourceTree = "<group>";
@@ -417,6 +412,7 @@
 				949F332028494EFB0088BA8E /* VenueLoader.swift in Sources */,
 				949F332628494F370088BA8E /* HTTPClient.swift in Sources */,
 				949F332528494F370088BA8E /* VenueItemsMapper.swift in Sources */,
+				944AFE18284E4ECA0001739C /* VenueLoaderAdapter.swift in Sources */,
 				944AFE0A284DEB5B0001739C /* VenueEndpoint.swift in Sources */,
 				944AFE0C284DEBED0001739C /* UserLocation.swift in Sources */,
 				949F332728494F370088BA8E /* RemoteVenueLoader.swift in Sources */,

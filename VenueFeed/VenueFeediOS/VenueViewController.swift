@@ -44,6 +44,10 @@ public final class VenueViewController: UIViewController {
         viewModel.reloadData = { [weak self] in
             self?.reloadTableData()
         }
+        
+        viewModel.alertErrorMessage = { [weak self] message in
+            self?.showErrorMessage(message: message)
+        }
     }
     
     @objc private func loadVenue() {
