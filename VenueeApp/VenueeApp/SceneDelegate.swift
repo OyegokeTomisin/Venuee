@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 import VenueFeed
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,8 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureWindow()
     }
     
+    private lazy var store: VenueStore = {
+        do {
+            return try CoreDataVenueStore(storeURL: NSPersistentContainer
+                .defaultDirectoryURL()
+                .appendingPathComponent("venue-store.sqlite"))
+        } catch {
+            return NullStore()
+        }
+    }()
+    
+    private lazy var localVenueLoader: LocalVenueLoader = {
+        LocalVenueLoader(store: store)
+    }()
+    
     private lazy var navigationController = UINavigationController(
-        rootViewController: VenueUIComposer.venueControllerComposedWith(location: UserLocation(long: 6.5, lat: 3.8))
+        rootViewController: VenueUIComposer.venueControllerComposedWith(location: UserLocation(long: 6.5, lat: 3.8), localVenueLoader: localVenueLoader)
     )
     
     func configureWindow() {

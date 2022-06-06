@@ -10,9 +10,9 @@ import Foundation
 public final class VenueLoaderAdapter: VenueLoader {
     
     private let remoteVenueLoader: VenueLoader
-    private let localVenueLoader: VenueLoader
+    private let localVenueLoader: LocalVenueLoader
     
-    public init(remoteLoader: VenueLoader, localLoader: VenueLoader) {
+    public init(remoteLoader: VenueLoader, localLoader: LocalVenueLoader) {
         self.remoteVenueLoader = remoteLoader
         self.localVenueLoader = localLoader
     }
@@ -20,15 +20,25 @@ public final class VenueLoaderAdapter: VenueLoader {
     public func load(completion: @escaping (LoadVenueResult) -> Void) {
         remoteVenueLoader.load { [weak self] result in
             switch result {
-            case .success(let array):
-                completion(.success(array))
+            case let .success(items):
+                completion(.success(items))
+                try? self?.localVenueLoader.save(items)
             case .failure(let error):
                 guard let error =  error as? RemoteVenueLoader.Error, error == .connectivity else {
                     completion(.failure(error))
                     return
                 }
-                self?.localVenueLoader.load(completion: completion)
+                self?.handleConnectivityFallback(completion: completion)
             }
+        }
+    }
+    
+    private func handleConnectivityFallback(completion: @escaping (LoadVenueResult) -> Void) {
+        do {
+            let items = try localVenueLoader.load()
+            completion(.success(items))
+        } catch let error {
+            completion(.failure(error))
         }
     }
 }
