@@ -162,6 +162,8 @@
 		947BFE0A284EA52A008B9F61 /* VenuePersistence */ = {
 			isa = PBXGroup;
 			children = (
+				947BFE2A284ECF9D008B9F61 /* LocalVenue.swift */,
+				947BFE13284EA7FB008B9F61 /* VenueStore.swift */,
 				947BFE0B284EA536008B9F61 /* CoreData */,
 			);
 			path = VenuePersistence;
@@ -172,7 +174,6 @@
 			children = (
 				947BFE2C284ED007008B9F61 /* ManagedVenue+CoreDataClass.swift */,
 				947BFE1F284EC14C008B9F61 /* VenueStore.xcdatamodeld */,
-				947BFE2A284ECF9D008B9F61 /* LocalVenue.swift */,
 				947BFE11284EA6BB008B9F61 /* CoreDataHelpers.swift */,
 				947BFE0F284EA684008B9F61 /* CoreDataVenueStore.swift */,
 			);
@@ -207,7 +208,6 @@
 			children = (
 				944AFE0B284DEBED0001739C /* UserLocation.swift */,
 				947BFE0A284EA52A008B9F61 /* VenuePersistence */,
-				947BFE13284EA7FB008B9F61 /* VenueStore.swift */,
 				944AFE12284E09610001739C /* Venue Presentation */,
 				949F332128494F1C0088BA8E /* Venue API */,
 				949F32FF2848B4740088BA8E /* Venue Feature */,

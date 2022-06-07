@@ -28,6 +28,11 @@ final public class AboutUsViewController: UIViewController {
         loadRequest()
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadRequest()
+    }
+    
     private func setupOnLoad() {
         view.addSubviews(webView)
         view.backgroundColor = .white
