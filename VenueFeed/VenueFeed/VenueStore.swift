@@ -9,6 +9,6 @@ import Foundation
 
 public protocol VenueStore {
     func deleteCachedVenue() throws
-    func insert(_ feed: [Venue]) throws
+    func insert(_ items: [Venue]) throws
     func retrieve() throws -> [Venue]?
 }

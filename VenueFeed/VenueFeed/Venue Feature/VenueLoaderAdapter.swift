@@ -24,7 +24,7 @@ public final class VenueLoaderAdapter: VenueLoader {
                 completion(.success(items))
                 try? self?.localVenueLoader.save(items)
             case .failure(let error):
-                guard let error =  error as? RemoteVenueLoader.Error, error == .connectivity else {
+                guard let error = error as? RemoteVenueLoader.Error, error == .connectivity else {
                     completion(.failure(error))
                     return
                 }

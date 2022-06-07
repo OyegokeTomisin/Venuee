@@ -56,15 +56,19 @@ extension CoreDataVenueStore: VenueStore {
     public func retrieve() throws -> [Venue]? {
         try performSync { context in
             Result {
-                []
+                try ManagedVenue.find(in: context).map {
+                    $0.localVenueItems.map( { Venue(name: $0.name, address: $0.address)})
+                }
             }
         }
     }
     
-    public func insert(_ feed: [Venue]) throws {
+    public func insert(_ items: [Venue]) throws {
         try performSync { context in
             Result {
-                
+                let managedCache = try ManagedVenue.newUniqueInstance(in: context)
+                managedCache.localVenueItems = items.map { LocalVenue(name: $0.name, address: $0.address)}
+                try context.save()
             }
         }
     }
@@ -72,7 +76,7 @@ extension CoreDataVenueStore: VenueStore {
     public func deleteCachedVenue() throws {
         try performSync { context in
             Result {
-                
+                try ManagedVenue.deleteCache(in: context)
             }
         }
     }

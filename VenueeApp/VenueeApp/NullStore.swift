@@ -11,7 +11,15 @@ import VenueFeed
 class NullStore {}
 
 extension NullStore: VenueStore {
-    func deleteCachedVenue() throws { }
-    func insert(_ feed: [Venue]) throws { }
-    func retrieve() throws -> [Venue]? { return nil }
+    func deleteCachedVenue() throws {
+        
+    }
+    
+    func insert(_ feed: [Venue]) throws {
+        
+    }
+    
+    func retrieve() throws -> [Venue]? {
+        return nil
+    }
 }
